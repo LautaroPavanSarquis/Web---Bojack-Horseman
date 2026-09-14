@@ -1,13 +1,319 @@
 @import "tailwindcss";
 
+:root {
+  --background: #0a1128;
+  --background-secondary: #0f172a;
+  --glass: rgba(255, 255, 255, 0.04);
+  --glass-hover: rgba(255, 255, 255, 0.07);
+  --border: rgba(255, 255, 255, 0.08);
+
+  --teal: #4fb0ae;
+  --cream: #f1e4c3;
+
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: #0b0e14; /* Noche azulada de Hollywoo */
-  color: #f1f5f9;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
   overflow-x: hidden;
 }
 
-/* Efecto opcional de neón suave para títulos/botones */
+/* ================================
+   GLASS
+================================ */
+
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.glass-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    transform 300ms ease;
+}
+
+.glass-card:hover {
+  background: var(--glass-hover);
+  border-color: rgba(79, 176, 174, 0.4);
+  transform: translateY(-4px);
+}
+
+/* ================================
+   CAROUSEL
+================================ */
+
+.carousel {
+  display: flex;
+  gap: 20px;
+
+  overflow-x: auto;
+  scroll-behavior: smooth;
+
+  scroll-snap-type: x mandatory;
+
+  /* Evita que el navegador "acomode" el scroll
+     de manera extraña */
+  overscroll-behavior-x: contain;
+
+  padding-top: 4px;
+  padding-bottom: 16px;
+}
+
+.carousel > * {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+/* Ocultar scrollbar */
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ================================
+   CAROUSEL BUTTONS
+================================ */
+
+.carousel-button {
+  position: absolute;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 9999px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  color: white;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  opacity: 0;
+
+  transition:
+    background-color 300ms ease,
+    color 300ms ease,
+    opacity 300ms ease;
+}
+
+.carousel-container:hover .carousel-button {
+  opacity: 1;
+}
+
+.carousel-button:hover {
+  background: var(--teal);
+  color: var(--background);
+}
+
+/* ================================
+   EPISODE CARDS
+================================ */
+
+.episode-card {
+  width: 300px;
+  height: 360px;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--glass);
+  border: 1px solid var(--border);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    transform 300ms ease;
+}
+
+.episode-card:hover {
+  background: var(--glass-hover);
+  border-color: rgba(79, 176, 174, 0.4);
+  transform: translateY(-4px);
+}
+
+.episode-card-image {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+
+  background: var(--background-secondary);
+}
+
+.episode-card-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 500ms ease;
+}
+
+.episode-card:hover .episode-card-image img {
+  transform: scale(1.05);
+}
+
+/* ================================
+   CHARACTER CARDS
+================================ */
+
+.character-card {
+  width: 280px;
+  height: 390px;
+
+  flex: 0 0 280px;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--glass);
+  border: 1px solid var(--border);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    transform 300ms ease;
+}
+
+.character-card:hover {
+  background: var(--glass-hover);
+  border-color: rgba(79, 176, 174, 0.4);
+  transform: translateY(-4px);
+}
+
+.character-card-image {
+  position: relative;
+
+  width: 100%;
+  height: 210px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  background: var(--background-secondary);
+}
+
+.character-card-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 500ms ease;
+}
+
+.character-card:hover .character-card-image img {
+  transform: scale(1.05);
+}
+
+.character-card-content {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  padding: 16px;
+
+  flex: 1;
+}
+
+.character-card-bio {
+  color: var(--text-secondary);
+
+  font-size: 0.875rem;
+  line-height: 1.5;
+
+  overflow: hidden;
+}
+
+/* ================================
+   SELECT
+================================ */
+
+.season-select {
+  appearance: none;
+
+  min-width: 180px;
+
+  padding: 10px 40px 10px 16px;
+
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  color: white;
+
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  cursor: pointer;
+
+  outline: none;
+
+  transition: background-color 200ms ease;
+}
+
+.season-select:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.season-select:focus {
+  border-color: rgba(79, 176, 174, 0.5);
+}
+
+/* ================================
+   UTILITY
+================================ */
+
 .glow-purple {
   text-shadow: 0 0 12px rgba(108, 92, 231, 0.6);
 }
@@ -16,17 +322,232 @@ body {
   box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
 }
 
-html {
-  scroll-behavior: smooth;
+.section-container {
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem 5%;
+  margin-bottom: 2rem;
 }
 
-/* Ocultar scrollbar para Chrome, Safari y Opera */
-.scrollbar-none::-webkit-scrollbar {
-  display: none;
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-/* Ocultar scrollbar para IE, Edge y Firefox */
-.scrollbar-none {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+.section-title {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.season-selector-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.season-label {
+  color: var(--text-secondary);
+
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.season-select-wrapper {
+  position: relative;
+}
+
+.season-option {
+  background: var(--background-secondary);
+  color: white;
+}
+
+.season-select-icon {
+  position: absolute;
+
+  width: 1rem;
+  height: 1rem;
+
+  right: 0.75rem;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: var(--text-secondary);
+
+  pointer-events: none;
+}
+
+/* ================================
+   EPISODES
+================================ */
+
+.episode-card {
+  width: 340px;
+  height: 360px;
+
+  flex: 0 0 340px;
+
+  overflow: hidden;
+
+  border-radius: 12px;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--glass);
+  border: 1px solid var(--border);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    transform 300ms ease;
+}
+
+.episode-card:hover {
+  background: var(--glass-hover);
+  border-color: rgba(79, 176, 174, 0.4);
+  transform: translateY(-4px);
+}
+
+.episode-card-image {
+  position: relative;
+
+  width: 100%;
+  height: 191px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  background: var(--background-secondary);
+}
+
+.episode-card-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 500ms ease;
+}
+
+.episode-card:hover .episode-card-image img {
+  transform: scale(1.05);
+}
+
+.episode-card-gradient {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.7),
+    transparent
+  );
+
+  pointer-events: none;
+}
+
+.episode-duration {
+  position: absolute;
+
+  right: 12px;
+  bottom: 12px;
+
+  padding: 4px 8px;
+
+  border-radius: 6px;
+
+  background: rgba(0, 0, 0, 0.75);
+
+  color: white;
+
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.episode-card-content {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  padding: 16px;
+
+  flex: 1;
+}
+
+.episode-card-title {
+  margin: 0;
+
+  color: white;
+
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+  font-weight: 600;
+
+  transition: color 200ms ease;
+}
+
+.episode-card:hover .episode-card-title {
+  color: var(--teal);
+}
+
+.episode-card-description {
+  margin: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 0.875rem;
+  line-height: 1.5;
+
+  overflow: hidden;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+  .section-container {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .episode-card {
+    width: 300px;
+    flex-basis: 300px;
+  }
+
+  .episode-card-image {
+    height: 169px;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
 }

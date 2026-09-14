@@ -40,8 +40,10 @@ export function Hero() {
           className="w-full h-full object-cover"
         />
 
+        {/* Gradient inferior */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a1128] via-transparent to-transparent pointer-events-none" />
 
+        {/* Botón de sonido */}
         <button
           onClick={toggleMute}
           aria-label={muted ? "Activar sonido" : "Silenciar"}
@@ -51,12 +53,19 @@ export function Hero() {
             bg-[#0a1128]/70 backdrop-blur-md
             border border-[#F1E4C3]/30
             flex items-center justify-center
-            text-[#F1E4C3] hover:bg-[#4FB0AE]/40
+            text-[#F1E4C3]
+            hover:bg-[#4FB0AE]/40
             transition-colors
           "
         >
           {muted ? (
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 fill="currentColor"
                 fillRule="evenodd"
@@ -65,7 +74,13 @@ export function Hero() {
               />
             </svg>
           ) : (
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 fill="currentColor"
                 fillRule="evenodd"
@@ -77,36 +92,64 @@ export function Hero() {
         </button>
       </div>
 
-      {/* Descripción en bubbles translúcidas */}
-      <div className="max-w-7xl mx-auto px-[5%] py-8 flex flex-col gap-4">
-        <div className="flex flex-wrap gap-3">
-          <div className="px-4 py-2 rounded-full bg-[#4FB0AE]/10 border border-[#4FB0AE]/25 text-[#4FB0AE] text-sm font-bold backdrop-blur-md">
-            2020
-          </div>
-          <div className="px-4 py-2 rounded-full bg-white/[0.04] border border-white/10 text-slate-300 text-sm font-medium backdrop-blur-md">
-            6 temporadas
-          </div>
-          <div className="px-4 py-2 rounded-full bg-[#F4C542]/10 border border-[#F4C542]/30 text-[#F4C542] text-sm font-bold backdrop-blur-md">
-            16+
-          </div>
-          <div className="px-4 py-2 rounded-full bg-[#E8637C]/10 border border-[#E8637C]/25 text-[#E8637C] text-sm font-medium backdrop-blur-md">
-            Comedia Dramática
-          </div>
-        </div>
+      {/* Información de la serie */}
+      <div className="max-w-7xl mx-auto px-[5%] py-8">
+        <div
+          className="
+            flex flex-col
+            items-start
+            gap-3
+            p-4 md:p-6
+            rounded-2xl
+            border-2 border-white/[0.04]
+            bg-white/10
+            backdrop-blur-2xl
+          "
+        >
+          {/* Título + metadata */}
+          <div className="flex flex-col gap-2">
+            <h1 className="text-2xl md:text-3xl font-bold text-white">
+              BoJack Horseman
+            </h1>
 
-        <div className="p-6 rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-xl">
-          <p className="text-slate-300 text-base md:text-lg leading-relaxed">
-            Conoce al caballo más amado de las comedias noventeras… veinte años después, cuando es un cascarrabias sin rumbo que intenta descubrir qué hacer con su vida en el caótico Hollywoo.
-          </p>
-        </div>
+            <ul className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm md:text-base text-slate-300">
+              <li>2020</li>
+              <li>6 temporadas</li>
+              <li>16+</li>
+              <li>Comedia</li>
+            </ul>
+          </div>
 
-        <div className="p-5 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl flex flex-col gap-1.5 text-xs md:text-sm text-slate-400">
-          <p>
-            <span className="text-[#F1E4C3] font-semibold">Protagonizada por:</span> Will Arnett, Aaron Paul y Amy Sedaris
-          </p>
-          <p>
-            <span className="text-[#F1E4C3] font-semibold">Creada por:</span> Raphael Bob-Waksberg
-          </p>
+          {/* Sinopsis + créditos */}
+          <div className="w-full flex flex-col gap-5">
+            <p className="text-slate-200 text-base md:text-lg leading-relaxed max-w-5xl">
+              Conocé al caballo más amado de las comedias de los 90... Veinte
+              años después, vive en una mansión siendo un cincuentón ortiva,
+              alcohólico y falopero , tratando de encontrarle algún sentido a
+              su vida mientras busca volver al estrellato en el caótico
+              Hollywoo.
+            </p>
+
+            {/* Separador */}
+            <div className="w-full h-px bg-white/10" />
+
+            {/* Créditos */}
+            <div className="flex flex-col gap-1.5 text-xs md:text-sm text-slate-400">
+              <p>
+                <span className="text-[#F1E4C3] font-semibold">
+                  Protagonizada por:
+                </span>{" "}
+                Will Arnett, Aaron Paul y Amy Sedaris
+              </p>
+
+              <p>
+                <span className="text-[#F1E4C3] font-semibold">
+                  Creada por:
+                </span>{" "}
+                Raphael Bob-Waksberg
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

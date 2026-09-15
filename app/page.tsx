@@ -35,7 +35,7 @@ const charactersData = [
     role: "Actor / Coprotagonista",
     actor: "Paul F. Tompkins",
     image: "/images/mp.jpg",
-    bio: 'Es un Golden Retriver, hiperactivo y optimista sin remedio. Es la contraparte directa de BoJack y, a pesar de sus buenas intenciones, suele ser superficial e incapaz de lidiar con el dolor real.',
+    bio: 'Es un Golden Retriver, hiperactivo y optimista sin remedio. A pesar de sus buenas intenciones, suele ser superficial e incapaz de lidiar con el dolor real.',
   },
   {
     id: 5,

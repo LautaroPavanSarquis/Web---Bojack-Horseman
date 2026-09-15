@@ -24,7 +24,7 @@ export function CharacterRow({ characters }: CharacterRowProps) {
   return (
     <section
       id="personajes"
-      className="w-full max-w-7xl mx-auto px-[5%] py-8 mb-8"
+      className="w-full max-w-7xl mx-auto px py-8 mb-8"
     >
       <div className="mb-6">
         <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-white">

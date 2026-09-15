@@ -39,7 +39,7 @@ export function QuoteGenerator() {
   };
 
   return (
-    <section id="quiz" className="py-8 px-[5%] max-w-7xl mx-auto">
+    <section id="quiz" className="py-8 px max-w-7xl mx-auto">
       <div className="p-6 md:p-8 rounded-2xl border border-[#00bcd4]/20 bg-white/[0.02] backdrop-blur-xl flex flex-col items-center text-center gap-4 relative overflow-hidden shadow-2xl">
         <span className="text-[#e91e63] text-xs font-extrabold uppercase tracking-widest">
           Frases Memorables

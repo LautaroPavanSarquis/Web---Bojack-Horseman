@@ -24,7 +24,7 @@ export function Hero() {
           width={520}
           height={140}
           priority
-          className="w-[240px] sm:w-[320px] md:w-[400px] h-auto"
+          className="w-[240px] sm:w-[320px] md:w-[800px] h-auto"        
         />
       </div>
 
@@ -93,7 +93,7 @@ export function Hero() {
       </div>
 
       {/* Información de la serie */}
-      <div className="max-w-7xl mx-auto px-[5%] py-8">
+      <div className="max-w-7xl mx-auto px py-8">
         <div
           className="
             flex flex-col
@@ -123,11 +123,9 @@ export function Hero() {
           {/* Sinopsis + créditos */}
           <div className="w-full flex flex-col gap-5">
             <p className="text-slate-200 text-base md:text-lg leading-relaxed max-w-5xl">
-              Conocé al caballo más amado de las comedias de los 90... Veinte
-              años después, vive en una mansión siendo un cincuentón ortiva,
-              alcohólico y falopero , tratando de encontrarle algún sentido a
-              su vida mientras busca volver al estrellato en el caótico
-              Hollywoo.
+              Conocé al caballo más amado de las comedias de los 90... Veinte años después, BoJack es un cincuentón malhumorado, 
+              con problemas de adicción y una mansión que ya no sabe cómo llenar. Entre excesos y malas decisiones busca recuperar la fama 
+              y volver al estrellato en un Hollywood tan caótico como él.
             </p>
 
             {/* Separador */}

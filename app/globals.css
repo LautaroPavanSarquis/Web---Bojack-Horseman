@@ -27,37 +27,27 @@ body {
 }
 
 /* ================================
-   GLASS
+   GLASS (bubble del Hero)
+   Base compartida por el Hero, las cards
+   de episodios/personajes y el Quiz.
 ================================ */
 
 .glass {
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid rgba(255, 255, 255, 0.04);
+  border-radius: 1rem;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
 }
 
-.glass-card {
-  background: var(--glass);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  transition:
-    background-color 300ms ease,
-    border-color 300ms ease,
-    transform 300ms ease;
-}
-
-.glass-card:hover {
-  background: var(--glass-hover);
-  border-color: rgba(79, 176, 174, 0.4);
-  transform: translateY(-4px);
-}
-
 /* ================================
    CAROUSEL
+   Usado por EpisodesSection y CharacterRow.
 ================================ */
+
+.carousel-container {
+  position: relative;
+}
 
 .carousel {
   display: flex;
@@ -91,10 +81,6 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
-/* ================================
-   CAROUSEL BUTTONS
-================================ */
 
 .carousel-button {
   position: absolute;
@@ -135,24 +121,19 @@ body {
 
 /* ================================
    EPISODE CARDS
+   Estructura propia + estética bubble
+   heredada de .glass (se combinan
+   ambas clases en el componente).
 ================================ */
 
 .episode-card {
   width: 300px;
-  height: 360px;
+  flex: 0 0 300px;
 
   overflow: hidden;
 
-  border-radius: 12px;
-
   display: flex;
   flex-direction: column;
-
-  background: var(--glass);
-  border: 1px solid var(--border);
-
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 
   transition:
     background-color 300ms ease,
@@ -161,7 +142,7 @@ body {
 }
 
 .episode-card:hover {
-  background: var(--glass-hover);
+  background: rgba(255, 255, 255, 0.14);
   border-color: rgba(79, 176, 174, 0.4);
   transform: translateY(-4px);
 }
@@ -171,264 +152,6 @@ body {
 
   width: 100%;
   aspect-ratio: 16 / 9;
-
-  overflow: hidden;
-
-  background: var(--background-secondary);
-}
-
-.episode-card-image img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-
-  transition: transform 500ms ease;
-}
-
-.episode-card:hover .episode-card-image img {
-  transform: scale(1.05);
-}
-
-/* ================================
-   CHARACTER CARDS
-================================ */
-
-.character-card {
-  width: 280px;
-  height: 390px;
-
-  flex: 0 0 280px;
-
-  overflow: hidden;
-
-  border-radius: 12px;
-
-  display: flex;
-  flex-direction: column;
-
-  background: var(--glass);
-  border: 1px solid var(--border);
-
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  transition:
-    background-color 300ms ease,
-    border-color 300ms ease,
-    transform 300ms ease;
-}
-
-.character-card:hover {
-  background: var(--glass-hover);
-  border-color: rgba(79, 176, 174, 0.4);
-  transform: translateY(-4px);
-}
-
-.character-card-image {
-  position: relative;
-
-  width: 100%;
-  height: 210px;
-
-  flex-shrink: 0;
-
-  overflow: hidden;
-
-  background: var(--background-secondary);
-}
-
-.character-card-image img {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-
-  transition: transform 500ms ease;
-}
-
-.character-card:hover .character-card-image img {
-  transform: scale(1.05);
-}
-
-.character-card-content {
-  display: flex;
-  flex-direction: column;
-
-  gap: 6px;
-
-  padding: 16px;
-
-  flex: 1;
-}
-
-.character-card-bio {
-  color: var(--text-secondary);
-
-  font-size: 0.875rem;
-  line-height: 1.5;
-
-  overflow: hidden;
-}
-
-/* ================================
-   SELECT
-================================ */
-
-.season-select {
-  appearance: none;
-
-  min-width: 180px;
-
-  padding: 10px 40px 10px 16px;
-
-  border-radius: 8px;
-
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-
-  color: white;
-
-  font-size: 0.875rem;
-  font-weight: 500;
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  cursor: pointer;
-
-  outline: none;
-
-  transition: background-color 200ms ease;
-}
-
-.season-select:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.season-select:focus {
-  border-color: rgba(79, 176, 174, 0.5);
-}
-
-/* ================================
-   UTILITY
-================================ */
-
-.glow-purple {
-  text-shadow: 0 0 12px rgba(108, 92, 231, 0.6);
-}
-
-.glow-cyan {
-  box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
-}
-
-.section-container {
-  width: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: 2rem 5%;
-  margin-bottom: 2rem;
-}
-
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.section-title {
-  margin: 0;
-
-  color: var(--text-primary);
-
-  font-size: 1.5rem;
-  line-height: 2rem;
-  font-weight: 700;
-  letter-spacing: -0.025em;
-}
-
-.season-selector-container {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.season-label {
-  color: var(--text-secondary);
-
-  font-size: 0.75rem;
-  line-height: 1rem;
-}
-
-.season-select-wrapper {
-  position: relative;
-}
-
-.season-option {
-  background: var(--background-secondary);
-  color: white;
-}
-
-.season-select-icon {
-  position: absolute;
-
-  width: 1rem;
-  height: 1rem;
-
-  right: 0.75rem;
-  top: 50%;
-
-  transform: translateY(-50%);
-
-  color: var(--text-secondary);
-
-  pointer-events: none;
-}
-
-/* ================================
-   EPISODES
-================================ */
-
-.episode-card {
-  width: 340px;
-  height: 360px;
-
-  flex: 0 0 340px;
-
-  overflow: hidden;
-
-  border-radius: 12px;
-
-  display: flex;
-  flex-direction: column;
-
-  background: var(--glass);
-  border: 1px solid var(--border);
-
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-
-  transition:
-    background-color 300ms ease,
-    border-color 300ms ease,
-    transform 300ms ease;
-}
-
-.episode-card:hover {
-  background: var(--glass-hover);
-  border-color: rgba(79, 176, 174, 0.4);
-  transform: translateY(-4px);
-}
-
-.episode-card-image {
-  position: relative;
-
-  width: 100%;
-  height: 191px;
-
-  flex-shrink: 0;
 
   overflow: hidden;
 
@@ -512,6 +235,82 @@ body {
 .episode-card-description {
   margin: 0;
 
+  color: var(--text-secondary);
+
+  font-size: 0.875rem;
+  line-height: 1.5;
+
+  overflow: hidden;
+}
+
+/* ================================
+   CHARACTER CARDS
+   Estructura propia + estética bubble
+   heredada de .glass (se combinan
+   ambas clases en el componente).
+================================ */
+
+.character-card {
+  width: 280px;
+  height: 390px;
+
+  flex: 0 0 280px;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    transform 300ms ease;
+}
+
+.character-card:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(79, 176, 174, 0.4);
+  transform: translateY(-4px);
+}
+
+.character-card-image {
+  position: relative;
+
+  width: 100%;
+  height: 210px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  background: var(--background-secondary);
+}
+
+.character-card-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 500ms ease;
+}
+
+.character-card:hover .character-card-image img {
+  transform: scale(1.05);
+}
+
+.character-card-content {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  padding: 16px;
+
+  flex: 1;
+}
+
+.character-card-bio {
   color: var(--text-secondary);
 
   font-size: 0.875rem;
@@ -657,10 +456,6 @@ body {
   color: var(--accent);
 }
 
-.quiz-affinity-fill {
-  background: var(--accent);
-}
-
 .quiz-restart-button {
   background: var(--accent);
   color: #0a1128;
@@ -675,29 +470,15 @@ body {
 ================================ */
 
 @media (max-width: 768px) {
-  .section-container {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-
-  .section-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .episode-card {
     width: 300px;
     flex-basis: 300px;
   }
-
-  .episode-card-image {
-    height: 169px;
-  }
 }
 
 @media (min-width: 768px) {
-  .section-title {
-    font-size: 1.875rem;
-    line-height: 2.25rem;
+  .episode-card {
+    width: 340px;
+    flex-basis: 340px;
   }
 }

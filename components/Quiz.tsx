@@ -29,7 +29,7 @@ const CHARACTERS: Record<CharacterKey, CharacterResult> = {
     role: 'Protagonista',
     actor: 'Will Arnett',
     accent: '#C4574B',
-    image: '/images/quiz/bojack.jpg',
+    image: '/images/bojack-quiz.jpg',
     description:
       'Buscás validación desesperadamente pero le tenés pánico a la intimidad. Tendés al autosabotaje cuando las cosas van bien.',
     quote:
@@ -40,7 +40,7 @@ const CHARACTERS: Record<CharacterKey, CharacterResult> = {
     role: 'Escritora',
     actor: 'Alison Brie',
     accent: '#5B7FBD',
-    image: '/images/quiz/diane.jpg',
+    image: '/images/dn.jpg',
     description:
       'Idealista, analítica y extremadamente exigente con vos misma y con el resto. Buscás que todo tenga un propósito profundo.',
     quote:
@@ -51,7 +51,7 @@ const CHARACTERS: Record<CharacterKey, CharacterResult> = {
     role: 'Agente / Representante',
     actor: 'Amy Sedaris',
     accent: '#D6598C',
-    image: '/images/quiz/carolyn.jpg',
+    image: '/images/pc-quiz.jpg',
     description:
       'La máquina imparable. Te ponés el mundo al hombro y solucionás la vida de todos, pero a costa de ignorar tus propias necesidades.',
     quote:
@@ -62,7 +62,7 @@ const CHARACTERS: Record<CharacterKey, CharacterResult> = {
     role: 'Roomie de BoJack',
     actor: 'Aaron Paul',
     accent: '#D64545',
-    image: '/images/quiz/todd.jpg',
+    image: '/images/todd.jpg',
     description:
       'Espíritu libre y creativo, pero sumido en una profunda inmadurez y falta de autosuficiencia. Flotás por la vida esquivando responsabilidades reales.',
     quote:
@@ -73,7 +73,7 @@ const CHARACTERS: Record<CharacterKey, CharacterResult> = {
     role: 'Actor / Coprotagonista',
     actor: 'Paul F. Tompkins',
     accent: '#F2C94C',
-    image: '/images/quiz/peanutbutter.jpg',
+    image: '/images/mp.jpg',
     description:
       'Optimismo inquebrantable y energía inagotable. Le huís a la negatividad manteniéndote siempre en movimiento.',
     quote: 'Está bien frenar y validar las emociones tristes cuando aparecen.',
@@ -325,7 +325,7 @@ export function Quiz() {
     return (
       <section id="quiz" className="py-8 px max-w-7xl mx-auto">
         <div
-          className={`glass p-6 md:p-10 rounded-2xl flex flex-col items-center text-center gap-5 ${
+          className={`glass p-6 md:p-10 flex flex-col items-center text-center gap-5 ${
             visible ? 'quiz-transition-visible' : 'quiz-transition-enter'
           }`}
         >
@@ -367,7 +367,7 @@ export function Quiz() {
     return (
       <section id="quiz" className="py-8 px max-w-7xl mx-auto">
         <div
-          className={`quiz-result-card p-6 md:p-8 rounded-2xl border-2 bg-white/10 backdrop-blur-2xl flex flex-col gap-8 ${
+          className={`glass quiz-result-card p-6 md:p-8 flex flex-col gap-8 ${
             visible ? 'quiz-transition-visible' : 'quiz-transition-enter'
           }`}
           style={{ '--accent': winner.accent } as React.CSSProperties}
@@ -457,7 +457,7 @@ export function Quiz() {
   return (
     <section id="quiz" className="py-8 px max-w-7xl mx-auto">
       <div
-        className="glass p-6 md:p-8 rounded-2xl flex flex-col gap-6"
+        className="glass p-6 md:p-8 flex flex-col gap-6"
       >
         {/* Barra de progreso */}
         <div className="flex items-center gap-2">

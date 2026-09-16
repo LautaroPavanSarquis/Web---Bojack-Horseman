@@ -96,14 +96,11 @@ export function Hero() {
       <div className="max-w-7xl mx-auto px py-8">
         <div
           className="
+            glass
             flex flex-col
             items-start
             gap-3
             p-4 md:p-6
-            rounded-2xl
-            border-2 border-white/[0.04]
-            bg-white/10
-            backdrop-blur-2xl
           "
         >
           {/* Título + metadata */}

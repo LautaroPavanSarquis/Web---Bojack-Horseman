@@ -13,7 +13,7 @@ interface CharacterCardProps {
 
 export function CharacterCard({ character }: CharacterCardProps) {
   return (
-    <article className="character-card snap-start">
+    <article className="glass character-card snap-start">
       <div className="character-card-image">
         <img
           src={character.image}

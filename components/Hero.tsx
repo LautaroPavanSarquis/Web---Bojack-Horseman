@@ -32,7 +32,7 @@ export function Hero() {
       <div className="relative w-full max-w-7xl mx-auto aspect-video overflow-hidden rounded-2xl border border-[#4FB0AE]/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
         <video
           ref={videoRef}
-          src="/videos/HeroVideo.mp4"
+          src="/videos/herovideo.mp4"
           autoPlay
           muted
           loop

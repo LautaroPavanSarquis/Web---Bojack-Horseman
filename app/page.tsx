@@ -2,7 +2,8 @@ import { Navbar } from '@/components/Navbar';
 import { Hero } from '@/components/Hero';
 import { EpisodesSection } from '@/components/EpisodesSection';
 import { CharacterRow } from '@/components/CharacterRow';
-import { QuoteGenerator } from '@/components/QuoteGenerator';
+import { Quiz } from '@/components/Quiz';
+
 
 const charactersData = [
   {
@@ -57,7 +58,7 @@ export default function Home() {
         <Hero />
         <EpisodesSection />
         <CharacterRow characters={charactersData} />
-        <QuoteGenerator />
+        <Quiz />
       </main>
     </div>
   );

@@ -50,7 +50,6 @@ export function EpisodesSection() {
             htmlFor="season-select"
             className="text-xs text-slate-400"
           >
-            Elegir temporada
           </label>
 
           <div className="relative">

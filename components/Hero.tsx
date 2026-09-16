@@ -24,7 +24,7 @@ export function Hero() {
           width={520}
           height={140}
           priority
-          className="w-[240px] sm:w-[320px] md:w-[800px] h-auto"        
+          className="w-[240px] sm:w-[320px] md:w-[700px] h-auto"        
         />
       </div>
 

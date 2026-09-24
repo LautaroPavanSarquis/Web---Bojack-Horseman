@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+import Navbar from "@/components/Navbar";
+import SubNavbar from "@/components/SubNavbar";
+import Footer from "@/components/Footer";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -13,17 +17,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "BoJack Horseman ",
-  description: "Conoce al caballo más famoso de los 90... 20 años después.",
+  title: "BoJack Horseman",
+  description: "Conocé al caballo más famoso de los 90... 20 años después.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="es"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Navbar />
+        <SubNavbar />
+
+        <main className="flex-1">
+          {children}
+        </main>
+
+        <Footer />
+      </body>
     </html>
   );
 }

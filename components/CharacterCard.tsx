@@ -1,45 +1,45 @@
-export interface Character {
-  id: string | number;
-  name: string;
-  role: string;
-  actor: string;
-  image: string;
-  bio: string;
-}
+import Link from "next/link";
+import Image from "next/image";
 
-interface CharacterCardProps {
+import type { Character } from "@/data/characters";
+
+type CharacterCardProps = {
   character: Character;
-}
+};
 
-export function CharacterCard({ character }: CharacterCardProps) {
+export default function CharacterCard({
+  character,
+}: CharacterCardProps) {
   return (
-    <article className="glass character-card snap-start">
+    <Link
+      href={`/characters/${character.slug}`}
+      className="character-card glass"
+    >
       <div className="character-card-image">
-        <img
+        <Image
           src={character.image}
           alt={character.name}
+          fill
+          sizes="280px"
         />
-
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-
-        <span className="absolute bottom-3 left-3 text-[#F1E4C3] text-xs font-semibold">
-          {character.actor}
-        </span>
       </div>
 
       <div className="character-card-content">
-        <h3 className="text-sm md:text-base font-semibold text-white">
-          {character.name}
-        </h3>
+        <div>
+          <h2 className="text-lg font-semibold text-white">
+            {character.name}
+          </h2>
 
-        <span className="text-xs text-[#4FB0AE] font-semibold">
-          {character.role}
-        </span>
+          <p className="mt-1 text-xs text-[var(--teal)]">
+            {character.role} · {character.actor}
+          </p>
+        </div>
 
         <p className="character-card-bio">
-          {character.bio}
+          {character.description}
         </p>
       </div>
-    </article>
+    </Link>
   );
 }
+

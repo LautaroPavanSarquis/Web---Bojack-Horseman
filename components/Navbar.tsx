@@ -1,46 +1,48 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type NavLink = {
-  href: string;
   label: string;
+  href: string;
 };
 
-export function Navbar() {
+export default function Navbar() {
+  const pathname = usePathname();
+
   const links: NavLink[] = [
-    { href: "#hero", label: "Inicio" },
-    { href: "#episodios", label: "Episodios" },
-    { href: "#personajes", label: "Personajes" },
-    { href: "#quiz", label: "Quiz" },
+    { label: "Home", href: "/" },
+    { label: "Episodes", href: "/episodes" },
+    { label: "Characters", href: "/characters" },
+    { label: "Gallery", href: "/gallery" },
+    { label: "Contact", href: "/contact" },
   ];
 
   return (
-    <header className="fixed top-6 left-0 w-full flex justify-center z-50 px-4">
-      <nav
-        className="
-          flex items-center gap-2 sm:gap-3
-          bg-[#0a1128]/80 backdrop-blur-md
-          border border-[#4FB0AE]/25
-          rounded-full
-          px-4 py-3
-          shadow-lg shadow-black/30
-        "
-      >
-        {links.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            aria-label={`Ir a la sección «${link.label}»`}
-            className="
-              text-base font-semibold text-[#F1E4C3]/80
-              px-5 py-2.5 rounded-full
-              hover:text-[#0a1128] hover:bg-[#F4C542]
-              transition-colors duration-200
-            "
-          >
-            {link.label}
-          </Link>
-        ))}
-      </nav>
-    </header>
+    <nav className="fixed top-5 left-1/2 z-50 w-[90%] max-w-5xl -translate-x-1/2">
+      <div className="glass flex items-center justify-center gap-1 rounded-full px-3 py-3">
+        {links.map((link: NavLink) => {
+          const active =
+            link.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(link.href);
+
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
+                active
+                  ? "bg-[var(--teal)] text-[var(--background)]"
+                  : "text-white hover:bg-white/10"
+              }`}
+            >
+              {link.label}
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
   );
 }

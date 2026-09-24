@@ -1,516 +1,244 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Image from 'next/image';
+import { useState } from "react";
+import Image from "next/image";
 
-type CharacterKey = 'bojack' | 'diane' | 'carolyn' | 'todd' | 'peanutbutter';
+import {
+  CHARACTERS,
+  CHARACTER_ORDER,
+  QUESTIONS,
+  type CharacterKey,
+} from "@/data/quiz";
 
-const CHARACTER_ORDER: CharacterKey[] = [
-  'bojack',
-  'diane',
-  'carolyn',
-  'todd',
-  'peanutbutter',
-];
-
-interface CharacterResult {
-  name: string;
-  role: string;
-  actor: string;
-  accent: string;
-  image: string;
-  description: string;
-  quote: string;
+function createEmptyScores(): Record<CharacterKey, number> {
+  return {
+    bojack: 0,
+    diane: 0,
+    carolyn: 0,
+    todd: 0,
+    peanutbutter: 0,
+  };
 }
 
-const CHARACTERS: Record<CharacterKey, CharacterResult> = {
-  bojack: {
-    name: 'BoJack Horseman',
-    role: 'Protagonista',
-    actor: 'Will Arnett',
-    accent: '#C4574B',
-    image: '/images/bojack-quiz.jpg',
-    description:
-      'Buscás validación desesperadamente pero le tenés pánico a la intimidad. Tendés al autosabotaje cuando las cosas van bien.',
-    quote:
-      'Cada día se vuelve un poco más fácil. Pero tenés que hacerlo todos los días, esa es la parte difícil.',
-  },
-  diane: {
-    name: 'Diane Nguyen',
-    role: 'Escritora',
-    actor: 'Alison Brie',
-    accent: '#5B7FBD',
-    image: '/images/dn.jpg',
-    description:
-      'Idealista, analítica y extremadamente exigente con vos misma y con el resto. Buscás que todo tenga un propósito profundo.',
-    quote:
-      'No hay "buenos" o "malos"; solo somos personas haciendo lo que podemos. Pero tenemos la responsabilidad de intentar ser mejores.',
-  },
-  carolyn: {
-    name: 'Princess Carolyn',
-    role: 'Agente / Representante',
-    actor: 'Amy Sedaris',
-    accent: '#D6598C',
-    image: '/images/pc-quiz.jpg',
-    description:
-      'La máquina imparable. Te ponés el mundo al hombro y solucionás la vida de todos, pero a costa de ignorar tus propias necesidades.',
-    quote:
-      'Nadie va a salvarte excepto vos mismo. Te caés cinco veces, te levantás seis y seguís empujando la piedra.',
-  },
-  todd: {
-    name: 'Todd Chavez',
-    role: 'Roomie de BoJack',
-    actor: 'Aaron Paul',
-    accent: '#D64545',
-    image: '/images/todd.jpg',
-    description:
-      'Espíritu libre y creativo, pero sumido en una profunda inmadurez y falta de autosuficiencia. Flotás por la vida esquivando responsabilidades reales.',
-    quote:
-      'El sillón es tentador, pero necesitás tus propias paredes.',
-  },
-  peanutbutter: {
-    name: 'Mr. Peanutbutter',
-    role: 'Actor / Coprotagonista',
-    actor: 'Paul F. Tompkins',
-    accent: '#F2C94C',
-    image: '/images/mp.jpg',
-    description:
-      'Optimismo inquebrantable y energía inagotable. Le huís a la negatividad manteniéndote siempre en movimiento.',
-    quote: 'Está bien frenar y validar las emociones tristes cuando aparecen.',
-  },
-};
-
-interface QuizOption {
-  key: CharacterKey;
-  letter: 'A' | 'B' | 'C' | 'D' | 'E';
-  text: string;
-}
-
-interface QuizQuestion {
-  eyebrow: string;
-  prompt: string;
-  options: QuizOption[];
-}
-
-const QUESTIONS: QuizQuestion[] = [
-  {
-    eyebrow: 'Proyecto & fracaso',
-    prompt:
-      'Estás a cargo de un proyecto clave, algo sale muy mal a mitad de camino y el fracaso parece inminente. ¿Cuál es tu reacción inmediata?',
-    options: [
-      {
-        key: 'bojack',
-        letter: 'A',
-        text: 'Entro en un espiral de pánico, me paralizo y me autosaboteo del todo. Si igual iba a fallar, mejor arruinarlo yo mismo.',
-      },
-      {
-        key: 'diane',
-        letter: 'B',
-        text: 'Me obsesiono buscando la falla ética o sistémica detrás del error. Necesito entender por qué estuvo mal para escribir una crítica constructiva.',
-      },
-      {
-        key: 'carolyn',
-        letter: 'C',
-        text: 'Cero emoción, 100% acción. Armo tres planes de contingencia en 5 minutos y resuelvo el caos antes de que nadie se entere.',
-      },
-      {
-        key: 'todd',
-        letter: 'D',
-        text: 'Me distraigo con una idea absurda en el camino y, por pura chiripa, esa tangente termina resolviendo el problema original.',
-      },
-      {
-        key: 'peanutbutter',
-        letter: 'E',
-        text: 'Le pongo la mejor cara, organizo un evento para subir el ánimo del equipo y asumo que todo se va a arreglar solo.',
-      },
-    ],
-  },
-  {
-    eyebrow: 'Un domingo a la tarde',
-    prompt:
-      'Es domingo a las 6 de la tarde, no tenés planes y te encontrás completamente solo/a en tu casa. ¿Qué pasa por tu cabeza?',
-    options: [
-      {
-        key: 'bojack',
-        letter: 'A',
-        text: 'Un vacío existencial aplastante. Pongo la tele de fondo para no escuchar mis propios pensamientos.',
-      },
-      {
-        key: 'diane',
-        letter: 'B',
-        text: 'Me pongo a procesar mis traumas sin resolver. Intento escribir o reflexionar, pero termino con una profunda melancolía.',
-      },
-      {
-        key: 'carolyn',
-        letter: 'C',
-        text: 'Intento descansar, pero a los 10 minutos me da culpa no estar siendo productiva. Termino adelantando trabajo de la semana.',
-      },
-      {
-        key: 'todd',
-        letter: 'D',
-        text: 'Transformo el living en un fuerte de sábanas, descubro un nuevo hobby aleatorio o me pongo a charlar con el del delivery.',
-      },
-      {
-        key: 'peanutbutter',
-        letter: 'E',
-        text: '¿Soledad? ¡Jamás! Llamo a 5 personas, organizo una cena improvisada. Estar solo no es una opción válida.',
-      },
-    ],
-  },
-  {
-    eyebrow: 'Vínculos & relaciones',
-    prompt:
-      'Alguien muy cercano a vos te confronta y te dice que le hiciste daño con una actitud tuya. ¿Cómo respondés?',
-    options: [
-      {
-        key: 'bojack',
-        letter: 'A',
-        text: 'Me pongo a la defensiva, me victimizo y digo "ya sé que soy una basura", esperando que me terminen consolando a mí.',
-      },
-      {
-        key: 'diane',
-        letter: 'B',
-        text: 'Escucho, me angustio internamente y analizo si la crítica es justa. Si lo es, me hundo en la culpa.',
-      },
-      {
-        key: 'carolyn',
-        letter: 'C',
-        text: 'Busco solucionar el daño de forma práctica e inmediata, aunque me cueste postergar mis propios sentimientos.',
-      },
-      {
-        key: 'todd',
-        letter: 'D',
-        text: 'Pido perdón con total sinceridad y de corazón. No suelo guardar rencor y prefiero volver a estar bien rápido.',
-      },
-      {
-        key: 'peanutbutter',
-        letter: 'E',
-        text: 'Me confundo por completo porque nunca fue mi intención. Intento tapar el conflicto con afecto exagerado.',
-      },
-    ],
-  },
-  {
-    eyebrow: 'Éxito & reconocimiento',
-    prompt:
-      'Lográs un hito gigante por el que trabajaste mucho tiempo. ¿Cómo te sentís al día siguiente?',
-    options: [
-      {
-        key: 'bojack',
-        letter: 'A',
-        text: 'Igual de vacío que antes. Me doy cuenta de que alcanzar la meta no arregló mágicamente mi vida.',
-      },
-      {
-        key: 'diane',
-        letter: 'B',
-        text: 'Cuestiono si realmente lo merezco o si este éxito tiene algún valor real en el gran esquema de las cosas.',
-      },
-      {
-        key: 'carolyn',
-        letter: 'C',
-        text: 'Ni tiempo de festejar: ya estoy pensando en el próximo objetivo. Si me detengo, siento que pierdo el impulso.',
-      },
-      {
-        key: 'todd',
-        letter: 'D',
-        text: 'Sorprendido pero feliz. Ni yo sé muy bien cómo llegué acá, pero ¡ey, qué buen viaje! A ver qué surge mañana.',
-      },
-      {
-        key: 'peanutbutter',
-        letter: 'E',
-        text: '¡En la cima del mundo! Quiero compartir la alegría con todo el mundo y organizar una fiesta inolvidable.',
-      },
-    ],
-  },
-  {
-    eyebrow: 'Tu visión del universo',
-    prompt:
-      'Si tuvieras que resumir tu filosofía de vida en una idea, ¿cuál sería?',
-    options: [
-      {
-        key: 'bojack',
-        letter: 'A',
-        text: 'La vida es una serie de decisiones horribles y después te morís... o peor, no te morís y tenés que levantarte al día siguiente.',
-      },
-      {
-        key: 'diane',
-        letter: 'B',
-        text: 'No hay "buenos" o "malos"; solo somos personas haciendo lo que podemos. Pero tenemos la responsabilidad de intentar ser mejores.',
-      },
-      {
-        key: 'carolyn',
-        letter: 'C',
-        text: 'Nadie va a salvarte excepto vos mismo. Te caés cinco veces, te levantás seis y seguís empujando la piedra.',
-      },
-      {
-        key: 'todd',
-        letter: 'D',
-        text: 'La vida es demasiado rara y maravillosa como para tomársela tan en serio. Dejá que las cosas fluyan.',
-      },
-      {
-        key: 'peanutbutter',
-        letter: 'E',
-        text: 'El sentido de la vida es mantenerte ocupado con tonterías sin importancia hasta que eventualmente te morís.',
-      },
-    ],
-  },
-];
-
-const EMPTY_SCORES: Record<CharacterKey, number> = {
-  bojack: 0,
-  diane: 0,
-  carolyn: 0,
-  todd: 0,
-  peanutbutter: 0,
-};
-
-function getWinner(scores: Record<CharacterKey, number>): CharacterKey {
-  return CHARACTER_ORDER.reduce((best, key) =>
-    scores[key] > scores[best] ? key : best
-  , CHARACTER_ORDER[0]);
-}
-
-export function Quiz() {
-  const [started, setStarted] = useState(false);
+export default function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [scores, setScores] = useState<Record<CharacterKey, number>>(EMPTY_SCORES);
-  const [selectedOption, setSelectedOption] = useState<CharacterKey | null>(null);
+  const [scores, setScores] =
+    useState<Record<CharacterKey, number>>(createEmptyScores);
+  const [selectedOption, setSelectedOption] = useState<CharacterKey | null>(
+    null
+  );
   const [showResult, setShowResult] = useState(false);
-  const [visible, setVisible] = useState(true);
 
-  const isLastQuestion = currentQuestion === QUESTIONS.length - 1;
+  const question = QUESTIONS[currentQuestion];
 
-  const handleAnswer = (key: CharacterKey) => {
+  const handleAnswer = (character: CharacterKey) => {
     if (selectedOption) return;
-    setSelectedOption(key);
 
-    const nextScores = { ...scores, [key]: scores[key] + 1 };
-    setScores(nextScores);
+    setSelectedOption(character);
+
+    setScores((previousScores) => ({
+      ...previousScores,
+      [character]: previousScores[character] + 1,
+    }));
 
     setTimeout(() => {
-      setVisible(false);
-
-      setTimeout(() => {
-        if (isLastQuestion) {
-          setShowResult(true);
-        } else {
-          setCurrentQuestion((q) => q + 1);
-        }
+      if (currentQuestion === QUESTIONS.length - 1) {
+        setShowResult(true);
+      } else {
+        setCurrentQuestion((previous) => previous + 1);
         setSelectedOption(null);
-        setVisible(true);
-      }, 250);
-    }, 450);
+      }
+    }, 500);
   };
 
-  const handleStart = () => {
-    setVisible(false);
-    setTimeout(() => {
-      setStarted(true);
-      setVisible(true);
-    }, 250);
+  const restartQuiz = () => {
+    setCurrentQuestion(0);
+    setScores(createEmptyScores());
+    setSelectedOption(null);
+    setShowResult(false);
   };
 
-  const handleRestart = () => {
-    setVisible(false);
-    setTimeout(() => {
-      setCurrentQuestion(0);
-      setScores(EMPTY_SCORES);
-      setSelectedOption(null);
-      setShowResult(false);
-      setStarted(false);
-      setVisible(true);
-    }, 250);
+  const getResults = () => {
+    const maxScore = Math.max(...Object.values(scores));
+
+    return CHARACTER_ORDER.map((key) => ({
+      key,
+      score: scores[key],
+      percentage:
+        maxScore === 0 ? 0 : Math.round((scores[key] / maxScore) * 100),
+      character: CHARACTERS[key],
+    })).sort((a, b) => b.score - a.score);
   };
-
-  if (!started) {
-    return (
-      <section id="quiz" className="py-8 px max-w-7xl mx-auto">
-        <div
-          className={`glass p-6 md:p-10 flex flex-col items-center text-center gap-5 ${
-            visible ? 'quiz-transition-visible' : 'quiz-transition-enter'
-          }`}
-        >
-          <span className="text-sm text-slate-400">Test de personalidad</span>
-
-          <h3 className="text-2xl md:text-3xl font-bold text-white max-w-xl">
-            ¿Qué personaje de BoJack Horseman sos?
-          </h3>
-
-          <p className="text-slate-300 leading-relaxed max-w-lg">
-            5 preguntas sobre cómo enfrentás el fracaso, la soledad y el éxito.
-            Respondé con sinceridad y descubrí a cuál de los cinco te parecés más.
-          </p>
-
-          <button
-            onClick={handleStart}
-            className="mt-2 px-6 py-2.5 rounded-lg bg-[var(--teal)] text-[#0a1128] font-extrabold text-xs uppercase tracking-wider transition-all duration-300 active:scale-95 hover:brightness-110"
-          >
-            Empezar el quiz
-          </button>
-        </div>
-      </section>
-    );
-  }
 
   if (showResult) {
-    const winnerKey = getWinner(scores);
-    const winner = CHARACTERS[winnerKey];
-    const totalAnswers = QUESTIONS.length;
-
-    const affinities = CHARACTER_ORDER
-      .map((key) => ({
-        key,
-        character: CHARACTERS[key],
-        percentage: Math.round((scores[key] / totalAnswers) * 100),
-      }))
-      .sort((a, b) => b.percentage - a.percentage);
+    const results = getResults();
+    const winner = results[0];
 
     return (
-      <section id="quiz" className="py-8 px max-w-7xl mx-auto">
+      <section className="mx-auto max-w-7xl px-5 py-16">
         <div
-          className={`glass quiz-result-card p-6 md:p-8 flex flex-col gap-8 ${
-            visible ? 'quiz-transition-visible' : 'quiz-transition-enter'
-          }`}
-          style={{ '--accent': winner.accent } as React.CSSProperties}
+          className="glass quiz-result-card mx-auto max-w-5xl overflow-hidden p-6 md:p-10"
+          style={
+            {
+              "--accent": winner.character.accent,
+            } as React.CSSProperties
+          }
         >
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-            <div className="w-full md:w-56 flex-shrink-0">
-              <div className="quiz-result-image">
-                <Image
-                  src={winner.image}
-                  alt={winner.name}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 224px"
-                />
-                <div className="quiz-result-image-gradient" />
-              </div>
+          <div className="grid gap-8 md:grid-cols-[280px_1fr] md:items-center">
+            <div className="quiz-result-image">
+              <Image
+                src={winner.character.image}
+                alt={winner.character.name}
+                fill
+                sizes="280px"
+              />
+
+              <div className="quiz-result-image-gradient" />
             </div>
 
-            <div className="flex flex-col gap-4 justify-center">
-              <div className="flex flex-col gap-1">
-                <span className="text-sm text-slate-400">
-                  Sos...
-                </span>
-                <h3 className="text-2xl md:text-3xl font-bold text-white">
-                  {winner.name}
-                </h3>
-                <span
-                  className="text-sm font-semibold"
-                  style={{ color: winner.accent }}
-                >
-                  {winner.role} · {winner.actor}
-                </span>
-              </div>
-
-              <p className="text-slate-300 leading-relaxed max-w-xl">
-                {winner.description}
+            <div>
+              <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-slate-400">
+                Tu personaje es
               </p>
 
-              <blockquote className="quiz-result-quote text-base md:text-lg italic font-medium border-l-2 pl-4"
-                style={{ borderColor: winner.accent }}
-              >
-                “{winner.quote}”
+              <h2 className="text-3xl font-bold text-white md:text-4xl">
+                {winner.character.name}
+              </h2>
+
+              <p className="mt-2 text-sm text-slate-400">
+                {winner.character.role} · {winner.character.actor}
+              </p>
+
+              <p className="mt-6 text-base leading-relaxed text-slate-200">
+                {winner.character.description}
+              </p>
+
+              <blockquote className="quiz-result-quote mt-6 border-l-2 pl-4 text-sm italic">
+                “{winner.character.quote}”
               </blockquote>
             </div>
           </div>
 
-          <div className="w-full h-px bg-white/10" />
+          <div className="mt-10 border-t border-white/10 pt-8">
+            <h3 className="mb-5 text-lg font-semibold text-white">
+              Tus afinidades
+            </h3>
 
-          <div className="flex flex-col gap-3">
-            <span className="text-sm text-slate-400">Tu afinidad con cada personaje</span>
+            <div className="space-y-4">
+              {results.map((result) => (
+                <div key={result.key}>
+                  <div className="mb-1 flex justify-between text-sm">
+                    <span className="text-slate-300">
+                      {result.character.name}
+                    </span>
 
-            <div className="flex flex-col gap-2.5">
-              {affinities.map(({ key, character, percentage }) => (
-                <div key={key} className="flex items-center gap-3">
-                  <span className="w-32 md:w-40 flex-shrink-0 text-xs md:text-sm text-slate-300 truncate">
-                    {character.name}
-                  </span>
-                  <div className="flex-1 h-2 rounded-full bg-white/5 overflow-hidden">
+                    <span className="text-slate-500">
+                      {result.score}/{QUESTIONS.length}
+                    </span>
+                  </div>
+
+                  <div className="h-2 overflow-hidden rounded-full bg-white/10">
                     <div
-                      className="h-full rounded-full transition-all duration-700 ease-out"
+                      className="h-full rounded-full transition-all duration-700"
                       style={{
-                        width: `${percentage}%`,
-                        backgroundColor: character.accent,
+                        width: `${result.percentage}%`,
+                        backgroundColor: result.character.accent,
                       }}
                     />
                   </div>
-                  <span className="w-10 flex-shrink-0 text-right text-xs text-slate-400">
-                    {percentage}%
-                  </span>
                 </div>
               ))}
             </div>
           </div>
 
           <button
-            onClick={handleRestart}
-            className="quiz-restart-button self-center px-6 py-2.5 rounded-lg font-extrabold text-xs uppercase tracking-wider transition-all duration-300 active:scale-95"
+            type="button"
+            onClick={restartQuiz}
+            className="quiz-restart-button mt-8 rounded-full px-6 py-3 text-sm font-semibold transition-all"
           >
-            Repetir el quiz
+            Repetir quiz
           </button>
         </div>
       </section>
     );
   }
 
-  const question = QUESTIONS[currentQuestion];
-
   return (
-    <section id="quiz" className="py-8 px max-w-7xl mx-auto">
-      <div
-        className="glass p-6 md:p-8 flex flex-col gap-6"
-      >
-        {/* Barra de progreso */}
-        <div className="flex items-center gap-2">
-          {QUESTIONS.map((_, i) => (
-            <div key={i} className="quiz-progress-step">
-              <div
-                className="quiz-progress-step-fill"
-                style={{
-                  width:
-                    i < currentQuestion
-                      ? '100%'
-                      : i === currentQuestion && selectedOption !== null
-                      ? '100%'
-                      : '0%',
-                }}
-              />
-            </div>
-          ))}
-        </div>
+    <section id="quiz" className="mx-auto max-w-4xl px-5 py-16">
+      <div className="mb-8 text-center">
+        <p className="text-sm font-semibold uppercase tracking-widest text-[var(--teal)]">
+          ¿Qué personaje sos?
+        </p>
 
-        <div
-          className={`flex flex-col gap-6 ${
-            visible ? 'quiz-transition-visible' : 'quiz-transition-enter'
-          }`}
-        >
-          <div className="flex flex-col gap-2">
-            <span className="text-sm text-slate-400">
-              Pregunta {currentQuestion + 1} de {QUESTIONS.length} · {question.eyebrow}
-            </span>
-            <h3 className="text-xl md:text-2xl font-bold text-white leading-snug">
-              {question.prompt}
-            </h3>
+        <h2 className="mt-2 text-3xl font-bold text-white md:text-4xl">
+          Descubrilo con este quiz
+        </h2>
+
+        <p className="mx-auto mt-3 max-w-2xl text-slate-400">
+          Cinco preguntas. Cero respuestas correctas. Probablemente demasiada
+          psicología improvisada.
+        </p>
+      </div>
+
+      <div className="mb-8 flex gap-2">
+        {QUESTIONS.map((_, index) => (
+          <div key={index} className="quiz-progress-step">
+            <div
+              className="quiz-progress-step-fill"
+              style={{
+                width:
+                  index < currentQuestion
+                    ? "100%"
+                    : index === currentQuestion
+                      ? "50%"
+                      : "0%",
+              }}
+            />
           </div>
+        ))}
+      </div>
 
-          <div className="flex flex-col gap-3">
+      <div className="glass p-5 md:p-8">
+        <div
+          key={currentQuestion}
+          className="quiz-transition-visible"
+        >
+          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--teal)]">
+            {question.eyebrow}
+          </p>
+
+          <h3 className="mt-3 text-xl font-semibold leading-relaxed text-white md:text-2xl">
+            {question.prompt}
+          </h3>
+
+          <div className="mt-7 space-y-3">
             {question.options.map((option) => (
               <button
-                key={option.letter}
-                onClick={() => handleAnswer(option.key)}
+                key={option.key}
+                type="button"
                 disabled={selectedOption !== null}
+                onClick={() => handleAnswer(option.key)}
                 className={`quiz-option ${
-                  selectedOption === option.key ? 'quiz-option-selected' : ''
+                  selectedOption === option.key
+                    ? "quiz-option-selected"
+                    : ""
                 }`}
               >
-                <span className="quiz-option-letter">{option.letter}</span>
-                <span className="text-sm md:text-base leading-relaxed">
-                  {option.text}
+                <span className="quiz-option-letter">
+                  {option.letter}
                 </span>
+
+                <span>{option.text}</span>
               </button>
             ))}
           </div>
+
+          <p className="mt-5 text-center text-xs text-slate-500">
+            Pregunta {currentQuestion + 1} de {QUESTIONS.length}
+          </p>
         </div>
       </div>
     </section>
   );
 }
+

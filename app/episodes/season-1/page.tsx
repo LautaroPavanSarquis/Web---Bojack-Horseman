@@ -20,12 +20,12 @@ export default function Season1Page() {
 
           <h1 className="mt-2 text-4xl font-bold text-white md:text-5xl">
             Temporada 1
-          </h1>
+          </h1> 
         </div>
 
         <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
           <video
-            src="/videos/herovideo.mp4"
+            src="/videos/HeroVideo.mp4"
             autoPlay
             muted
             loop

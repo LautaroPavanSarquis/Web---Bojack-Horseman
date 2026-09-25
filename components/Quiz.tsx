@@ -186,12 +186,7 @@ export default function Quiz() {
             <div
               className="quiz-progress-step-fill"
               style={{
-                width:
-                  index < currentQuestion
-                    ? "100%"
-                    : index === currentQuestion
-                      ? "50%"
-                      : "0%",
+                width: index < currentQuestion ? "100%" : "0%",
               }}
             />
           </div>

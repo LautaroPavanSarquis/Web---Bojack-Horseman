@@ -13,10 +13,10 @@ export default function Navbar() {
 
   const links: NavLink[] = [
     { label: "Home", href: "/" },
-    { label: "Episodes", href: "/episodes" },
-    { label: "Characters", href: "/characters" },
-    { label: "Gallery", href: "/gallery" },
-    { label: "Contact", href: "/contact" },
+    { label: "Episodios", href: "/episodes" },
+    { label: "Personajes", href: "/characters" },
+    { label: "Galeria", href: "/gallery" },
+    { label: "Contacto", href: "/contact" },
   ];
 
   return (
@@ -34,7 +34,7 @@ export default function Navbar() {
               href={link.href}
               className={`rounded-full px-5 py-2 text-sm font-medium transition-all ${
                 active
-                  ? "bg-[var(--teal)] text-[var(--background)]"
+                  ? "bg-[var(--cream)] text-[var(--background)]"
                   : "text-white hover:bg-white/10"
               }`}
             >

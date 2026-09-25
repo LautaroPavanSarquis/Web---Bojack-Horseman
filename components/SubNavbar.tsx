@@ -10,12 +10,12 @@ type SubNavLink = {
 
 const subNavLinks: Record<string, SubNavLink[]> = {
   "/episodes": [
-    { label: "Season 1", href: "/episodes/season-1" },
-    { label: "Season 2", href: "/episodes/season-2" },
-    { label: "Season 3", href: "/episodes/season-3" },
-    { label: "Season 4", href: "/episodes/season-4" },
-    { label: "Season 5", href: "/episodes/season-5" },
-    { label: "Season 6", href: "/episodes/season-6" },
+    { label: "Temporada 1", href: "/episodes/season-1" },
+    { label: "Temporada 2", href: "/episodes/season-2" },
+    { label: "Temporada 3", href: "/episodes/season-3" },
+    { label: "Temporada 4", href: "/episodes/season-4" },
+    { label: "Temporada 5", href: "/episodes/season-5" },
+    { label: "Temporada 6", href: "/episodes/season-6" },
   ],
 
   "/characters": [

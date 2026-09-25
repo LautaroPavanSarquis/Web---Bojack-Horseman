@@ -44,10 +44,7 @@ export default function GalleryModal({
         </div>
 
         <div className="flex flex-col justify-center p-6 md:p-8">
-          <p className="text-xs font-semibold uppercase tracking-widest text-[var(--teal)]">
-            Momento
-          </p>
-
+          
           <h2 className="mt-2 text-2xl font-bold text-white md:text-3xl">
             {item.title}
           </h2>

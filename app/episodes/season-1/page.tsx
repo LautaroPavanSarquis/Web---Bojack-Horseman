@@ -1,5 +1,6 @@
 import EpisodeCarousel from "@/components/EpisodeCarousel";
 import { episodesData } from "@/data/episodes";
+import Image from "next/image";
 
 export default function Season1Page() {
   const episodes = episodesData[1];
@@ -8,9 +9,14 @@ export default function Season1Page() {
     <main className="mx-auto max-w-7xl px-5 pb-16 pt-[150px]">
       <section>
         <div className="mb-6">
-          <p className="text-sm font-semibold uppercase tracking-widest text-[var(--teal)]">
-            BoJack Horseman
-          </p>
+          <Image
+            src="/images/logo-netflix.webp"
+            alt="BoJack Horseman"
+            width={520}
+            height={140}
+            priority
+            className="w-[80px] sm:w-[120px] md:w-[180px] h-auto"
+          />
 
           <h1 className="mt-2 text-4xl font-bold text-white md:text-5xl">
             Temporada 1

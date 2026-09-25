@@ -1,5 +1,6 @@
 import Gallery from "@/components/Gallery";
 import { galleryData } from "@/data/gallery";
+import Image from "next/image";
 
 export default function GalleryPage() {
   return (

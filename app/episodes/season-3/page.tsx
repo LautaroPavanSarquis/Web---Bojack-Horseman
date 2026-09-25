@@ -25,7 +25,7 @@ export default function Season1Page() {
 
         <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
           <video
-            src="https://imdb-video.media-imdb.com/vi1653849369/1434659607842-pgv4ql-1552799621395.mp4?Expires=1790363300&Signature=fBsnhG4HRb52q1JqOz-pGaNXc9c-jLZ1W1d5fAo5Q3CRZNqWuUXuIJ8CIRizcizlcEwlz1QdiuCZZ9cxtJRcb0isB-zHiWIxyZ8Wt1DKoXMT2ef4exav-JhVqkgnRE2US7VP4D0rz4GiWMjCQDgyCPHTuMVSG3JsKeicbX8krZF1amJ1TMPUVYaLR6ySXR1aCp4eQlNryoGzt-yJ-o1Yt3AYx8zbMS~C4ZFuvHwktVOSQtZzoXe3TOkW5DgihqEpRRGG32zeIWAWBwfevAq5ijVmv77vIxzq934gaJSENq4xfSUCvkXXtnHiHcDyO5ZzWfiQQttSjmoupM0BR5tcyg__&Key-Pair-Id=APKAIFLZBVQZ24NQH3KA"
+            src="/videos/trailer3.mp4"
             autoPlay
             muted
             loop

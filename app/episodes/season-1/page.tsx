@@ -25,7 +25,7 @@ export default function Season1Page() {
 
         <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
           <video
-            src="/videos/trailertemp1.mp4"
+            src="/videos/herovideo.mp4"
             autoPlay
             muted
             loop
